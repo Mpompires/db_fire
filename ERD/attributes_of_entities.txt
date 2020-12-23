@@ -1,0 +1,46 @@
+-- ΑΓΓΕΛΙΑ
+
+aggelia_id (primary)
+akinito_id (foreign)
+price
+aggelia_type (select)
+created_on (date)
+modified_on (date)
+closed_on (date)
+available (bool)
+available_since (date)
+
+text (text)
+
+-- ΑΚΙΝΗΤΟ
+
+akinito_id (primary)
+surface_area
+area (varchar)
+area_coords
+description (text)
+
+-- ΚΑΤΟΙΚΙΑ
+
+akinito_id (foreign-primary)
+katoikia_type (select)
+heating_system (select)
+bathrooms
+floor
+parking_spot (bool)
+construnction_year (date)
+internal (text)
+external (text)
+extra (text)
+
+-- ΕΠΑΓ. ΧΩΡΟΣ
+
+akinito_id (foreign-primary)
+parking_spot (bool)
+construnction_year (date)
+internal (text)
+external (text)
+extra (text)
+
+-- ΓΗ
+
