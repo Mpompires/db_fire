@@ -1,8 +1,8 @@
 -- ΑΓΓΕΛΙΑ
 
 aggelia_id (primary)
-akinito_id (foreign)
-politis_id (->melos_id, foreign)
+akinhto_id (foreign)
+pwlhths_id (->melos_id, foreign)
 price
 aggelia_type (select)
 created_on (date)
@@ -10,19 +10,18 @@ modified_on (date)
 closed_on (date)
 available (bool)
 available_since (date)
-
 text (text)
 
 -- ΑΚΙΝΗΤΟ
 
-akinito_id (primary)
+akinhto_id (primary)
 surface_area
 area (varchar)
 area_coords
 description (text)
 extra (text)
 
--- ΚΑΤΟΙΚΙΑ
+-- A. ΚΑΤΟΙΚΙΑ
 
 akinito_id (foreign-primary)
 katoikia_type (select)
@@ -34,7 +33,7 @@ construnction_year (date)
 internal (text)
 external (text)
 
--- ΕΠΑΓ. ΧΩΡΟΣ
+-- A. ΕΠΑΓ. ΧΩΡΟΣ
 
 akinito_id (foreign-primary)
 parking_spot (bool)
@@ -42,7 +41,7 @@ construnction_year (date)
 internal (text)
 external (text)
 
--- ΓΗ
+-- A. ΓΗ
 
 akinito_id (foreign-primary)
 building_coeff
@@ -57,13 +56,18 @@ email (varchar)
 first_name (varchar)
 last_name (varchar)
 is_endiaferomenos (bool)
-is_poliths (bool)
+is_pwlhths (bool)
 
--- ΕΝΔΙΑΦΕΡΟΜΕΝΟΣ
+-- Μ. ΕΝΔΙΑΦΕΡΟΜΕΝΟΣ
 
 melos_id (foreign-primary)
 
--- ΠΩΛΗΤΗΣ
+-- Μ. ΕΝΔΙΑΦΕΡΟΜΕΝΟΣ_ΕΝΔΙΑΦΕΡΕΤΑΙ
+
+melos_id (foreign-primary)
+aggelia_id (foreign-primary)
+
+-- Μ. ΠΩΛΗΤΗΣ
 
 melos_id (foreign-primary)
 AFM (varchar-unique)
@@ -81,12 +85,7 @@ brand_address (varchar)
 AFM (primary-varchar)
 first_name (varchar)
 last_name (varchar)
-is_poliths (bool)
-
--- ΕΝΔΙΑΦΕΡΕΤΑΙ
-
-melos_id (foreign-primary)
-aggelia_id (foreign-primary)
+is_pwlhths (bool)
 
 -- ΙΔΙΟΚΤΗΤΗΣ_ΕΧΕΙ
 

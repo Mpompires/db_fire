@@ -1,9 +1,0 @@
-BEGIN TRANSACTION;
-CREATE TABLE IF NOT EXISTS "aggelia" (
-	"aggelia_id"	INTEGER,
-	"akinito_id"	INTEGER NOT NULL UNIQUE,
-	"politis_id"	INTEGER NOT NULL UNIQUE,
-	FOREIGN KEY("politis_id") REFERENCES "aggelia",
-	PRIMARY KEY("aggelia_id" AUTOINCREMENT)
-);
-COMMIT;
