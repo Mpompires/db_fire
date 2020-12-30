@@ -85,7 +85,6 @@ brand_address (varchar)
 AFM (primary-varchar)
 first_name (varchar)
 last_name (varchar)
-is_pwlhths (bool)
 
 -- ΙΔΙΟΚΤΗΤΗΣ_ΕΧΕΙ
 
