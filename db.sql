@@ -45,10 +45,10 @@ CREATE TABLE IF NOT EXISTS "m_endiaferomenos_endiaferetai" (
 );
 CREATE TABLE IF NOT EXISTS "a_epaggelmatikos_xwros" (
 	"akinito_id" INTEGER,
-	"parking_spot" REAL,
+	"parking_spot" INTEGER,
 	"construnction_year" TEXT,
-	"internal"	TEXT,
-	"external"	TEXT,
+	"internal" TEXT,
+	"external" TEXT,
 	PRIMARY KEY("akinito_id"),
 	FOREIGN KEY("akinito_id") REFERENCES "akinhto"("akinito_id") ON DELETE CASCADE
 );
@@ -68,8 +68,8 @@ CREATE TABLE IF NOT EXISTS "a_katoikia" (
 	"bathrooms"	INTEGER,
 	"floor"	INTEGER,
 	"construction_year"	TEXT,
-	"internal"	TEXT,
-	"external"	TEXT,
+	"internal" TEXT,
+	"external" TEXT,
 	PRIMARY KEY("akinito_id"),
 	FOREIGN KEY("akinito_id") REFERENCES "akinhto"("akinito_id") ON DELETE CASCADE
 );
@@ -87,7 +87,7 @@ CREATE TABLE IF NOT EXISTS "idiokthths_exei" (
 	FOREIGN KEY("akinito_id") REFERENCES "akinhto"("akinito_id") ON DELETE CASCADE
 );
 CREATE TABLE IF NOT EXISTS "m_endiaferomenos" (
-	"melos_id"	INTEGER,
+	"melos_id" INTEGER,
 	PRIMARY KEY("melos_id" AUTOINCREMENT),
 	FOREIGN KEY("melos_id") REFERENCES "melos"("melos_id") ON DELETE CASCADE
 );
@@ -95,7 +95,7 @@ CREATE TABLE IF NOT EXISTS "m_pwlhths" (
 	"melos_id" INTEGER,
 	"afm" INTEGER UNIQUE,
 	"telephone"	TEXT,
-	"is_mesiths" REAL,
+	"is_mesiths" INTEGER,
 	PRIMARY KEY("melos_id"),
 	FOREIGN KEY("melos_id") REFERENCES "melos"("melos_id") ON DELETE CASCADE
 );
