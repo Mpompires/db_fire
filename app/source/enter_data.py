@@ -1,8 +1,7 @@
-import sqlite3, csv
+import csv
+import connect
 
-con = sqlite3.connect("db.db")
-con.execute("PRAGMA foreign_keys = 1")
-cur = con.cursor()
+con, cur = connect.connect()
 
 def enter_data_for(entity):
     data = open(f"data/{entity[0]}.csv")
