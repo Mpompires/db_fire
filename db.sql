@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS "akinhto" (
 CREATE TABLE IF NOT EXISTS "melos" (
 	"melos_id" INTEGER,
 	"username" TEXT,
-	"passwork" TEXT,	
+	"password" TEXT,	
 	"email"	TEXT,
 	"first_name" TEXT,
 	"last_name"	TEXT,
