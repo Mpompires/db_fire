@@ -1,6 +1,6 @@
 from hashlib import sha256
 import sqlite3
-from connect import connect
+from .connect import connect
 
 def insert_melos(melos):
     con, cur = connect()
