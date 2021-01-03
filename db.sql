@@ -15,8 +15,8 @@ CREATE TABLE IF NOT EXISTS "melos" (
 	"email"	TEXT,
 	"first_name" TEXT,
 	"last_name"	TEXT,
-	"is_endiaferomenos"	REAL,
-	"is_pwlhths" REAL,
+	"is_endiaferomenos"	INTEGER,
+	"is_pwlhths" INTEGER,
 	PRIMARY KEY("melos_id" AUTOINCREMENT)
 );
 CREATE TABLE IF NOT EXISTS "aggelia" (
