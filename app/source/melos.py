@@ -25,7 +25,7 @@ def become_pwlhths(username, afm, telephone, is_mesiths):
     if is_mesiths:
         pass
     else:
-        cur.execute(f'INSERT INTO m_pwlhths (melos_id, afm, telephone, is_mesiths) VALUES ({melos_id}, {afm}, {telephone}, 0)')
+        cur.execute(f'INSERT INTO m_pwlhths VALUES ({melos_id}, {afm}, {telephone}, 0)')
         cur.execute(f'UPDATE melos SET is_pwlhths = 1 WHERE username == "{username}"')
     con.commit()
     con.close()
