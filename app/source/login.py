@@ -1,7 +1,7 @@
 from .melos import validate
 from getpass import getpass
 
-def login():
+def login(*args):
     melos = input('Username: ')
     password = getpass()
     if validate(melos, password): 

@@ -1,9 +1,10 @@
 from .melos import insert_melos
 import hashlib
+from getpass import getpass
 
-def signup():
+def signup(*args):
     username = input('Username: ')
-    password = hashlib.sha256(input('Password: ').encode('utf-8')).digest()
+    password = hashlib.sha256(getpass().encode('utf-8')).digest()
     email = input('Email: ')
     first_name = input('First Name: ')
     last_name = input('Last Name: ')

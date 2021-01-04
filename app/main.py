@@ -1,6 +1,7 @@
 from source.signup import signup
 from source.search import search
 from source.login import login
+from source.signup_pwlhths import signup_pwlhths
 
 current_user = None
 
@@ -8,10 +9,11 @@ def logout():
     return None
 
 options = {
-    's': signup,
+    'sin': signup,
     'lin': login,
     'lout': logout,
-    's': search
+    's': search,
+    'sinp': signup_pwlhths
 }
 
 def check(option):
@@ -34,4 +36,4 @@ def check(option):
 
 while True:
     option = input(f'{current_user}> ')
-    if check(option): current_user = options[option]()
+    if check(option): current_user = options[option](current_user)
