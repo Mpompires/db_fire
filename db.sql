@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS "akinhto" (
 );
 CREATE TABLE IF NOT EXISTS "melos" (
 	"melos_id" INTEGER,
-	"username" TEXT,
+	"username" TEXT UNIQUE,
 	"password" TEXT,	
 	"email"	TEXT,
 	"first_name" TEXT,
