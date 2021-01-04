@@ -1,4 +1,5 @@
 from source.signup import signup
+from source.search import search
 from source.login import login
 
 current_user = None
@@ -9,7 +10,8 @@ def logout():
 options = {
     's': signup,
     'lin': login,
-    'lout': logout
+    'lout': logout,
+    's': search
 }
 
 def check(option):
