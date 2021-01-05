@@ -6,7 +6,9 @@ CREATE TABLE IF NOT EXISTS "akinhto" (
 	"area_coords" TEXT,	
 	"description" TEXT,
 	"extra"	TEXT,
-	PRIMARY KEY("akinito_id" AUTOINCREMENT)
+	"diaxhrizetai_pwlhths_id" INTEGER,
+	PRIMARY KEY("akinito_id" AUTOINCREMENT),
+	FOREIGN KEY("diaxhrizetai_pwlhths_id") REFERENCES "m_pwlhths"("melos_id") ON DELETE CASCADE
 );
 CREATE TABLE IF NOT EXISTS "melos" (
 	"melos_id" INTEGER,
