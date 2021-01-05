@@ -1,4 +1,4 @@
-BEGIN TRANSACTION;
+	BEGIN TRANSACTION;
 CREATE TABLE IF NOT EXISTS "akinhto" (
 	"akinito_id" INTEGER,
 	"surface_area" REAL,
@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS "aggelia" (
 	"created_on" TEXT,
 	"modified_on" TEXT,
 	"closed_on"	TEXT,
-	"available"	REAL,
+	"available"	INTEGER,
 	"available_since" TEXT,
 	"text"	TEXT,
 	PRIMARY KEY("aggelia_id" AUTOINCREMENT),

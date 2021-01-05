@@ -24,7 +24,8 @@ entities = [
     ("akinhto", 7),
     ("a_katoikia", 8),
     ("a_epaggelmatikos_xwros", 5),
-    ("a_gh", 3)
+    ("a_gh", 3),
+    ("aggelia", 11)
 ]
 
 for entity in entities:
