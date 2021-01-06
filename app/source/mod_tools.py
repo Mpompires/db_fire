@@ -1,4 +1,5 @@
 from .connect import connect
+from .uwu_print import uwu_print
 
 def is_mod(username):
     con, cur = connect()
@@ -28,18 +29,17 @@ def mod_list_akinhta(*args):
     if len(username_in_question) == 0:
         con, cur = connect()
         result_table = cur.execute(f'SELECT * FROM akinhto').fetchall()
+        uwu_print(result_table, ['a', 'b', 'c', 'a', 'b', 'c', 'b'])
         con.close()
     elif _does_username_exist(username_in_question):
         melos_id = _get_melos_id(username_in_question)
         con, cur = connect()
         result_table = cur.execute(f'SELECT * FROM akinhto WHERE diaxhrizetai_pwlhths_id == {melos_id}').fetchall()
+        uwu_print(result_table, ['a', 'b', 'c', 'a', 'b', 'c', 'b'])
         con.close()
     else:
         print("No such user..")
         return None
 
-    for row in result_table:
-        for col in row:
-            print(str(col) + ' ', end ='' )
-        print('')
+
 

@@ -24,7 +24,7 @@ def check(option):
     if option not in options:
         print('Invalid option..')
         return False
-    
+
     if option == 'sin':
         if current_user is not None:
             print('Cannot signup while logged in..')
