@@ -17,15 +17,14 @@ options = {
     'lout': logout,
     's': search,
     'sinp': signup_pwlhths,
-    'mod_list_akinhta': mod_list_akinhta,
-    'quit': None
+    'mod_list_akinhta': mod_list_akinhta
 }
 
 def check(option):
     if option not in options:
         print('Invalid option..')
         return False
-
+    
     if option == 'sin':
         if current_user is not None:
             print('Cannot signup while logged in..')
@@ -53,17 +52,15 @@ def check(option):
         if not is_mod(current_user):
             print('No permission :/')
             return False
-    elif option == 'quit':
-        return False
     return True
 
 
 while True:
     option = input(f'{current_user}> ')
-    if check(option):
+    if option == 'quit':
+        quit()
+    elif check(option):
         return_user = options[option](current_user)
         if return_user is not None:
             current_user = return_user
-    elif option == 'quit':
-        quit()
 
