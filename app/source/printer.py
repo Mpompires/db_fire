@@ -2,7 +2,7 @@
 def _trim_string(string, max_size):
     dots_count = 2
     if len(string) > max_size:
-        return string[0:max_size-1-dots_count] + '.'*dots_count
+        return string[0:max_size-dots_count] + '.'*dots_count
     return string
 
 
@@ -60,12 +60,27 @@ def print_table(table, columns):
     for i in range(row_count):
         out = '{:<{max_length}}'.format(str(table[i][0]), max_length=column_max_length[0])
         for j in range(1, column_count):
-            out = out + ',' + '{:<{max_length}}'.format(str(table[i][j]), max_length=column_max_length[j])
+            out = out + ' ' + '{:<{max_length}}'.format(str(table[i][j]), max_length=column_max_length[j])
         print(out)
 
 
-def print_row(row, column_names):
+def print_row(row, columns):
     max_line_size = 80
+    colon = ': '
+    for i in range(len(columns)):
+        this_column_name_length = len(columns[i] + colon)
+        this_column_output = str(row[i])
+        this_column_output_length = len(this_column_output)
 
-    for i in range(len(column_names)):
-        this_column_name_length = len(column_names[i])
+        out = columns[i] + colon
+        for i in range(this_column_output_length // (max_line_size - this_column_name_length) + 1):
+            start = i*(max_line_size - this_column_name_length)
+            end = min((i + 1)*(max_line_size - this_column_name_length), this_column_output_length)
+            if i == 0:
+                out = out + this_column_output[start: end]
+            else:
+                out = out + ' '*this_column_name_length + this_column_output[start: end]
+            out += '\n'
+
+        print(out, end='')
+
