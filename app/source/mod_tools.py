@@ -1,5 +1,5 @@
 from .connect import connect
-from .printer import print_table
+from .printer import print_table,print_row
 
 def _does_username_exist(username):
     con, cur = connect()
@@ -16,13 +16,13 @@ def _get_melos_id(username):
     return melos_id
 
 def mod_list_akinhta(*args):
-    username_in_question = input("Username of pwlhth (just press ENTER to lis t all akinhta): ")
+    username_in_question = input("Username of pwlhth (just press ENTER to list all akinhta): ")
     if len(username_in_question) == 0:
         con, cur = connect()
         result_table = cur.execute(f'SELECT akinito_id, surface_area, area, area_coords, description, extra, username'
                                    f'   FROM akinhto JOIN melos ON diaxhrizetai_pwlhths_id = melos_id').fetchall()
         print_table(result_table,
-                    ['ID ακινήτου', 'Εμβαδόν', 'Περιοχή', 'Συντεταγμένες', 'Περιγραφή', 'Επιπρόσθετες πληροφορίες', 'Username'])
+                    ['ID ακινήτου', 'Εμβαδόν', 'Περιοχή', 'Συντεταγμένες', ['Περιγραφή', 25], ['Επιπρόσθετες πληροφορίες', 25], 'Username'])
         con.close()
     elif _does_username_exist(username_in_question):
         melos_id = _get_melos_id(username_in_question)
@@ -31,7 +31,7 @@ def mod_list_akinhta(*args):
                                    f'   FROM akinhto'
                                    f'   WHERE diaxhrizetai_pwlhths_id == {melos_id}').fetchall()
         print_table(result_table,
-                    ['ID ακινήτου', 'Εμβαδόν', 'Περιοχή', 'Συντεταγμένες', ['Περιγραφή', 25], ['Επιπρόσθετες πληροφορίες', 15]])
+                    ['ID ακινήτου', 'Εμβαδόν', 'Περιοχή', 'Συντεταγμένες', ['Περιγραφή', 25], ['Επιπρόσθετες πληροφορίες', 25]])
         con.close()
     else:
         print("No such user..")
