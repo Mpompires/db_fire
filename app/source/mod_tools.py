@@ -33,6 +33,3 @@ def mod_list_akinhta(*args):
         con.close()
     else:
         print("No such user..")
-
-
-

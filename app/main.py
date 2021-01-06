@@ -38,16 +38,12 @@ def check(option):
         if current_user is None:
             print('Not logged in..')
             return False
-    elif option == 'sin':
-        if current_user is None:
-            print('Not logged in..')
-            return False
     elif option == 'sinp':
         if current_user is None:
             print('Not logged in..')
             return False
     elif option == 'mod_list_akinhta':
-        if (current_user is None):
+        if current_user is None:
             print('Not logged in..')
             return False
         if not is_mod(current_user):
