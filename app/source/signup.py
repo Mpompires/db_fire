@@ -10,5 +10,6 @@ def signup(*args):
     last_name = input('Last Name: ')
     is_endiaferomenos = 1
     is_pwlhths = 0
-    row = (None, username, password, email, first_name, last_name, is_endiaferomenos, is_pwlhths)
+    is_mod = 0
+    row = (None, username, password, email, first_name, last_name, is_endiaferomenos, is_pwlhths, is_mod)
     insert_melos(row)

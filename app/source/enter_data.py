@@ -19,7 +19,7 @@ def enter_data_for(entity):
             cur.execute(f"INSERT INTO {entity[0]} VALUES {cols}", row)
 
 entities = [
-    ("melos", 8),
+    ("melos", 9),
     ("m_pwlhths",4),
     ("akinhto", 7),
     ("a_katoikia", 8),

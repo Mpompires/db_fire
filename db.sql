@@ -1,4 +1,4 @@
-	BEGIN TRANSACTION;
+BEGIN TRANSACTION;
 CREATE TABLE IF NOT EXISTS "akinhto" (
 	"akinito_id" INTEGER,
 	"surface_area" REAL,
@@ -19,6 +19,7 @@ CREATE TABLE IF NOT EXISTS "melos" (
 	"last_name"	TEXT,
 	"is_endiaferomenos"	INTEGER,
 	"is_pwlhths" INTEGER,
+	"is_mod" INTEGER,
 	PRIMARY KEY("melos_id" AUTOINCREMENT)
 );
 CREATE TABLE IF NOT EXISTS "aggelia" (
@@ -41,7 +42,7 @@ CREATE TABLE IF NOT EXISTS "aggelia" (
 CREATE TABLE IF NOT EXISTS "m_endiaferomenos_endiaferetai" (
 	"melos_id" INTEGER,
 	"aggelia_id" INTEGER,
-	PRIMARY KEY("melos_id","aggelia_id")
+	PRIMARY KEY("melos_id","aggelia_id"),
     FOREIGN KEY("melos_id") REFERENCES "melos"("melos_id") ON DELETE CASCADE, 
     FOREIGN KEY("aggelia_id") REFERENCES "aggelia"("aggelia_id") ON DELETE CASCADE
 );
