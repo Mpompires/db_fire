@@ -25,21 +25,22 @@ def _get_melos_id(username):
 
 def mod_list_akinhta(*args):
     username_in_question = input("Username of pwlhth (just press ENTER to list all akinhta): ")
-
     if len(username_in_question) == 0:
         con, cur = connect()
-        result_table = cur.execute(f'SELECT * FROM akinhto').fetchall()
-        uwu_print(result_table, ['a', 'b', 'c', 'a', 'b', 'c', 'b'])
+        result_table = cur.execute(f'SELECT akinito_id, surface_area, area, area_coords, description, extra, username'
+                                   f'   FROM akinhto JOIN melos ON diaxhrizetai_pwlhths_id = melos_id').fetchall()
+        uwu_print(result_table, ['ID ακινήτου', 'Εμβαδόν', 'Περιοχή', 'Συντεταγμένες', 'Περιγραφή', 'Επιπρόσθετες πληροφορίες', 'Username'])
         con.close()
     elif _does_username_exist(username_in_question):
         melos_id = _get_melos_id(username_in_question)
         con, cur = connect()
-        result_table = cur.execute(f'SELECT * FROM akinhto WHERE diaxhrizetai_pwlhths_id == {melos_id}').fetchall()
-        uwu_print(result_table, ['a', 'b', 'c', 'a', 'b', 'c', 'b'])
+        result_table = cur.execute(f'SELECT akinito_id, surface_area, area, area_coords, description, extra '
+                                   f'   FROM akinhto'
+                                   f'   WHERE diaxhrizetai_pwlhths_id == {melos_id}').fetchall()
+        uwu_print(result_table, ['ID ακινήτου', 'Εμβαδόν', 'Περιοχή', 'Συντεταγμένες', 'Περιγραφή', 'Επιπρόσθετες πληροφορίες'])
         con.close()
     else:
         print("No such user..")
-        return None
 
 
 
