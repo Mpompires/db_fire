@@ -20,6 +20,14 @@ def validate(melos, password):
         return True
     return False
 
+def is_mod(username):
+    con, cur = connect()
+    is_mod_int = cur.execute(f'SELECT is_mod FROM melos WHERE username == "{username}"').fetchall()[0][0]
+    con.close()
+    if is_mod_int == 1:
+        return True
+    return False
+
 def become_pwlhths(username, afm, telephone, is_mesiths):
     con, cur = connect()
     melos_id = cur.execute(f'SELECT melos_id FROM melos WHERE username == "{username}"').fetchall()[0][0]

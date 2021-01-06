@@ -1,8 +1,9 @@
 from source.signup import signup
 from source.search import search
 from source.login import login
+from source.melos import is_mod
 from source.signup_pwlhths import signup_pwlhths
-from source.mod_tools import is_mod, mod_list_akinhta
+from source.mod_tools import mod_list_akinhta
 
 current_user = None
 

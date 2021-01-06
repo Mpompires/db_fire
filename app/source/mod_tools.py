@@ -1,14 +1,6 @@
 from .connect import connect
 from .uwu_print import uwu_print
 
-def is_mod(username):
-    con, cur = connect()
-    is_mod_int = cur.execute(f'SELECT is_mod FROM melos WHERE username == "{username}"').fetchall()[0][0]
-    con.close()
-    if is_mod_int == 1:
-        return True
-    return False
-
 def _does_username_exist(username):
     con, cur = connect()
     meloi_found = cur.execute(f'SELECT count(melos_id) FROM melos WHERE username == "{username}"').fetchall()[0][0]
