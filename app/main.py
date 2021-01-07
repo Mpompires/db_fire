@@ -3,7 +3,7 @@ from source.search import search
 from source.login import login
 from source.melos import is_mod
 from source.signup_pwlhths import signup_pwlhths
-from source.mod_tools import mod_list_akinhta
+from source.mod_tools import mod_list_akinhta_pwlhth, mod_list_akinhta_idiwkthth
 
 current_user = None
 
@@ -18,7 +18,8 @@ options = {
     'lout': logout,
     's': search,
     'sinp': signup_pwlhths,
-    'mod_list_akinhta': mod_list_akinhta
+    'mod_list_akinhta_pwlhth': mod_list_akinhta_pwlhth,
+    'mod_list_akinhta_idiwkthth': mod_list_akinhta_idiwkthth
 }
 
 def check(option):
@@ -42,7 +43,7 @@ def check(option):
         if current_user is None:
             print('Not logged in..')
             return False
-    elif option == 'mod_list_akinhta':
+    elif option == 'mod_list_akinhta_pwlhth' or option == 'mod_list_akinhta_idiwkthth':
         if current_user is None:
             print('Not logged in..')
             return False
