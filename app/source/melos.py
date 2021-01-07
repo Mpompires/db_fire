@@ -1,5 +1,4 @@
 from hashlib import sha256
-import sqlite3
 from .connect import connect
 
 def insert_melos(melos):
@@ -20,6 +19,20 @@ def validate(melos, password):
         return True
     return False
 
+def does_username_exist(username):
+    con, cur = connect()
+    meloi_found = cur.execute(f'SELECT count(melos_id) FROM melos WHERE username == "{username}"').fetchall()[0][0]
+    con.close()
+    if meloi_found == 1:
+        return True
+    return False
+
+def get_melos_id(username):
+    con, cur = connect()
+    melos_id = cur.execute(f'SELECT melos_id FROM melos WHERE username == "{username}"').fetchall()[0][0]
+    con.close()
+    return melos_id
+
 def is_mod(username):
     con, cur = connect()
     is_mod_int = cur.execute(f'SELECT is_mod FROM melos WHERE username == "{username}"').fetchall()[0][0]
@@ -28,13 +41,18 @@ def is_mod(username):
         return True
     return False
 
-def become_pwlhths(username, afm, telephone, is_mesiths):
+def is_pwlhths(username):
     con, cur = connect()
-    melos_id = cur.execute(f'SELECT melos_id FROM melos WHERE username == "{username}"').fetchall()[0][0]
-    if is_mesiths:
-        pass
-    else:
-        cur.execute(f'INSERT INTO m_pwlhths VALUES ({melos_id}, {afm}, {telephone}, 0)')
-        cur.execute(f'UPDATE melos SET is_pwlhths = 1 WHERE username == "{username}"')
+    is_pwlhths_int = cur.execute(f'SELECT is_pwlhths FROM melos WHERE username == "{username}"').fetchall()[0][0]
+    con.close()
+    if is_pwlhths_int == 1:
+        return True
+    return False
+
+def become_pwlhths(username, telephone, afm_mesitikou):
+    con, cur = connect()
+    melos_id = get_melos_id(username)
+    cur.execute(f'INSERT INTO m_pwlhths VALUES ({melos_id}, {telephone}, {afm_mesitikou})')
+    cur.execute(f'UPDATE melos SET is_pwlhths = 1 WHERE username == "{username}"')
     con.commit()
     con.close()

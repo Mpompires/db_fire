@@ -85,17 +85,16 @@ CREATE TABLE IF NOT EXISTS "m_endiaferomenos" (
 );
 CREATE TABLE IF NOT EXISTS "m_pwlhths" (
 	"melos_id" INTEGER,
-	"afm" INTEGER UNIQUE,
 	"telephone"	TEXT,
-	"is_mesiths" INTEGER,
+	"mesitiko_grafeio_afm" INTEGER,
 	PRIMARY KEY("melos_id"),
-	FOREIGN KEY("melos_id") REFERENCES "melos"("melos_id") ON DELETE CASCADE
+	FOREIGN KEY("melos_id") REFERENCES "melos"("melos_id") ON DELETE CASCADE,
+	FOREIGN KEY("mesitiko_grafeio_afm") REFERENCES "mesitiko_grafeio"("afm") ON DELETE CASCADE
 );
-CREATE TABLE IF NOT EXISTS "mesiths" (
-	"afm" TEXT,
+CREATE TABLE IF NOT EXISTS "mesitiko_grafeio" (
+	"afm" INTEGER,
 	"brand_name" TEXT,
 	"brand_address" TEXT,
-	PRIMARY KEY("afm"),
-	FOREIGN KEY("afm") REFERENCES "m_pwlhths"("melos_id") ON DELETE CASCADE
+	PRIMARY KEY("afm")
 );
 COMMIT;
