@@ -7,6 +7,8 @@ CREATE TABLE IF NOT EXISTS "akinhto" (
 	"description" TEXT,
 	"extra"	TEXT,
 	"diaxhrizetai_pwlhths_id" INTEGER,
+	"first_name_idiokthth" TEXT,
+	"last_name_idiokthth" TEXT,
 	PRIMARY KEY("akinito_id" AUTOINCREMENT),
 	FOREIGN KEY("diaxhrizetai_pwlhths_id") REFERENCES "m_pwlhths"("melos_id") ON DELETE CASCADE
 );
@@ -74,19 +76,6 @@ CREATE TABLE IF NOT EXISTS "a_katoikia" (
 	"internal" TEXT,
 	"external" TEXT,
 	PRIMARY KEY("akinito_id"),
-	FOREIGN KEY("akinito_id") REFERENCES "akinhto"("akinito_id") ON DELETE CASCADE
-);
-CREATE TABLE IF NOT EXISTS "idiokthths" (
-	"afm" TEXT,
-	"first_name" TEXT,
-	"last_name"	TEXT,
-	PRIMARY KEY("afm")
-);
-CREATE TABLE IF NOT EXISTS "idiokthths_exei" (
-	"akinito_id" INTEGER,
-	"idiokthths_afm" TEXT,
-	PRIMARY KEY("akinito_id","idiokthths_afm"),
-	FOREIGN KEY("idiokthths_afm") REFERENCES "idiokthths"("afm") ON DELETE CASCADE, 
 	FOREIGN KEY("akinito_id") REFERENCES "akinhto"("akinito_id") ON DELETE CASCADE
 );
 CREATE TABLE IF NOT EXISTS "m_endiaferomenos" (

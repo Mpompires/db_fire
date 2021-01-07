@@ -1,8 +1,8 @@
 import csv
-import connect
+from source.connect import connect
 from hashlib import sha256
 
-con, cur = connect.connect()
+con, cur = connect()
 
 def enter_data_for(entity):
     data = open(f"data/{entity[0]}.csv")
@@ -21,7 +21,7 @@ def enter_data_for(entity):
 entities = [
     ("melos", 9),
     ("m_pwlhths",4),
-    ("akinhto", 7),
+    ("akinhto", 9),
     ("a_katoikia", 8),
     ("a_epaggelmatikos_xwros", 5),
     ("a_gh", 3),
