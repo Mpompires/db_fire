@@ -7,7 +7,6 @@ from source.mod_tools import mod_sign_as, mod_list_akinhta_idiwkthth
 
 current_user = None
 
-
 def logout(*args):      # dirty stuff
     global current_user
     current_user = None

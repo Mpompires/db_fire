@@ -9,6 +9,8 @@ CREATE TABLE IF NOT EXISTS "akinhto" (
 	"diaxhrizetai_pwlhths_id" INTEGER,
 	"first_name_idiokthth" TEXT,
 	"last_name_idiokthth" TEXT,
+	"akinhto_type" TEXT
+	    CHECK(akinhto_type = "epaggelmatikos_xwros" or akinhto_type = "gh" or akinhto_type = "katoikia"),
 	PRIMARY KEY("akinito_id" AUTOINCREMENT),
 	FOREIGN KEY("diaxhrizetai_pwlhths_id") REFERENCES "m_pwlhths"("melos_id") ON DELETE CASCADE
 );
