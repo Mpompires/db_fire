@@ -20,7 +20,8 @@ def enter_data_for(entity):
 
 entities = [
     ("melos", 9),
-    ("m_pwlhths",4),
+    ("mesitiko_grafeio", 3),
+    ("m_pwlhths",3),
     ("akinhto", 9),
     ("a_katoikia", 8),
     ("a_epaggelmatikos_xwros", 5),
