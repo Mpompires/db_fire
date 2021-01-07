@@ -1,7 +1,7 @@
 from .connect import connect
 from .melos import become_pwlhths
 
-def _if_mesitiko_does_not_exist_regist_it(afm):
+def _if_mesitiko_does_not_exist_add_it(afm):
     con, cur = connect()
     mesitika_found = cur.execute(f'SELECT count(afm) FROM mesitiko_grafeio WHERE afm == "{afm}"').fetchall()[0][0]
     if mesitika_found == 0:
@@ -17,5 +17,5 @@ def signup_pwlhths(username):
     is_at_mesitiko = input('Se mesitiko grafeio [Y/n]: ')
     if is_at_mesitiko == 'Y' or is_at_mesitiko == 'y':
         mesitiko_afm = input('AFM mesitikou grafeiou: ')
-        _if_mesitiko_does_not_exist_regist_it(mesitiko_afm)
+        _if_mesitiko_does_not_exist_add_it(mesitiko_afm)
     become_pwlhths(username, telephone, mesitiko_afm)
