@@ -2,7 +2,7 @@ from .connect import connect
 from .melos import does_username_exist
 from .printer import print_table,print_row
 
-def sign_as(*args):
+def mod_sign_as(*args):
     as_username = input("Sign as: ")
     if not does_username_exist(as_username):
         print("This user does not exist")
