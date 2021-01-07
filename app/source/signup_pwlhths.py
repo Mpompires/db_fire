@@ -1,5 +1,5 @@
 from .connect import connect
-from .melos import become_pwlhths, is_pwlhths
+from .melos import become_pwlhths
 
 def _if_mesitiko_does_not_exist_regist_it(afm):
     con, cur = connect()
@@ -13,9 +13,6 @@ def _if_mesitiko_does_not_exist_regist_it(afm):
     con.close()
 
 def signup_pwlhths(username):
-    if is_pwlhths(username):
-        print("You are already pwlhths")
-        return None
     telephone = input('Telephone: ')
     is_at_mesitiko = input('Se mesitiko grafeio [Y/n]: ')
     if is_at_mesitiko == 'Y' or is_at_mesitiko == 'y':

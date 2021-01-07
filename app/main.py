@@ -1,7 +1,7 @@
 from source.signup import signup
 from source.search import search
 from source.login import login
-from source.melos import is_mod
+from source.melos import is_mod, is_pwlhths
 from source.signup_pwlhths import signup_pwlhths
 from source.mod_tools import mod_list_akinhta_pwlhth, mod_list_akinhta_idiwkthth
 
@@ -43,6 +43,8 @@ def check(option):
         if current_user is None:
             print('Not logged in..')
             return False
+        if is_pwlhths(current_user):
+            print('Already pwlhths')
     elif option == 'mod_list_akinhta_pwlhth' or option == 'mod_list_akinhta_idiwkthth':
         if current_user is None:
             print('Not logged in..')
