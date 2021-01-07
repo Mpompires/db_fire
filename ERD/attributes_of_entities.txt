@@ -21,6 +21,8 @@ area_coords
 description (text)
 extra (text)
 diaxhrizetai_pwlhths_id (foreign)
+first_name_idiokthth(text)
+last_name_idiokthth(text)
 
 -- A. ΚΑΤΟΙΚΙΑ
 
