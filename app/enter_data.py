@@ -22,7 +22,7 @@ entities = [
     ("melos", 9),
     ("mesitiko_grafeio", 3),
     ("m_pwlhths",3),
-    ("akinhto", 9),
+    ("akinhto", 10),
     ("a_katoikia", 8),
     ("a_epaggelmatikos_xwros", 5),
     ("a_gh", 3),
