@@ -3,7 +3,7 @@ from source.search import search
 from source.login import login
 from source.melos import is_mod, is_pwlhths
 from source.signup_pwlhths import signup_pwlhths
-from source.mod_tools import mod_sign_as, mod_list_akinhta_idiwkthth, mod_list_mesitika_grafeia
+from source.mod_tools import mod_sign_as, mod_list_akinhta_idiwkthth, mod_list_mesitika_grafeia, mod_list_pwlhtes
 
 current_user = None
 
@@ -19,7 +19,8 @@ options = {
     'sinp': signup_pwlhths,
     'mod_sign_as': mod_sign_as,
     'mod_list_akinhta_idiwkthth': mod_list_akinhta_idiwkthth,
-    'mod_list_mesitika_grafeia' : mod_list_mesitika_grafeia
+    'mod_list_mesitika_grafeia' : mod_list_mesitika_grafeia,
+    'mod_list_pwlhtes': mod_list_pwlhtes
 }
 
 def check(option):
@@ -47,7 +48,8 @@ def check(option):
             print('Already pwlhths')
     elif option == 'mod_sign_as' \
       or option == 'mod_list_akinhta_idiwkthth' \
-      or option == 'mod_list_mesitika_grafeia':
+      or option == 'mod_list_mesitika_grafeia' \
+      or option == 'mod_list_pwlhtes':
         if current_user is None:
             print('Not logged in..')
             return False
