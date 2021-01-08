@@ -30,10 +30,27 @@ def mod_list_akinhta_idiwkthth(*args):
 
 def mod_list_mesitika_grafeia(*args):
     con, cur = connect()
-    result_table = cur.execute(f'SELECT afm, brand_name, brand_address, count(melos_id)'
-                               f'   FROM mesitiko_grafeio JOIN m_pwlhths ON afm = mesitiko_grafeio_afm'
-                               f'   GROUP BY afm'
-                               f'   ORDER BY count(melos_id)').fetchall()
+    result_table = cur.execute(f'SELECT mg.afm, mg.brand_name, mg.brand_address, count(DISTINCT p.melos_id), count(DISTINCT ag.aggelia_id), count(DISTINCT ak.akinito_id)'
+                               f'  FROM m_pwlhths p '
+                               f'   JOIN mesitiko_grafeio mg ON p.mesitiko_grafeio_afm = mg.afm'
+                               f'   JOIN aggelia ag ON ag.pwlhths_id = p.melos_id'
+                               f'   JOIN akinhto ak ON ak.diaxhrizetai_pwlhths_id = p.melos_id'
+                               f'   GROUP BY mg.afm'
+                               f'   ORDER BY count(DISTINCT ag.aggelia_id) DESC').fetchall()
     con.close()
     print_table(result_table,
-                ['ΑΦΜ', ['Όνομα', 25], ['Διεύθυνση', 25], 'Εγγεγραμένοι Πωλητές'])
+                ['ΑΦΜ', ['Όνομα', 25], ['Διεύθυνση', 25], 'Εγγεγραμένοι Πωλητές', 'Συνολικές αγγελίες', 'Συνολικά διαχ. ακίνητα'])
+
+def mod_list_pwlhtes(*args):
+    con, cur = connect()
+    result_table = cur.execute(f'SELECT username, first_name, last_name, count(DISTINCT ag.aggelia_id), count(DISTINCT ak.akinito_id), brand_name'
+                               f'  FROM m_pwlhths p '
+                               f'   JOIN melos m ON p.melos_id = m.melos_id '
+                               f'   JOIN mesitiko_grafeio mg ON p.mesitiko_grafeio_afm = mg.afm'
+                               f'   JOIN aggelia ag ON ag.pwlhths_id = p.melos_id'
+                               f'   JOIN akinhto ak ON ak.diaxhrizetai_pwlhths_id = p.melos_id'
+                               f'   GROUP BY p.melos_id'
+                               f'   ORDER BY count(DISTINCT ag.aggelia_id) DESC').fetchall()
+    con.close()
+    print_table(result_table,
+                ['Username', ['Επώνυμο', 25], ['Όνομα', 25], 'Πλήθος αγγελιών', 'Πλήθος διαχ. ακινήτων', ['Μεσιτικό γραφείο', 25]])
