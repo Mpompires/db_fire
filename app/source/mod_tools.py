@@ -13,7 +13,7 @@ def mod_list_akinhta_idiwkthth(*args):
     first_name = input("First name of idiwkthth: ")
     last_name = input("Last name of idiwkthth: ")
 
-    queue = (f'SELECT akinito_id, surface_area, area, area_coords, description, extra, username'
+    queue = (f'SELECT akinito_id, surface_area, area, area_coords, description, extra, akinhto_type, username'
              f'   FROM akinhto JOIN melos ON diaxhrizetai_pwlhths_id = melos_id'
              f'   WHERE TRUE ')
     if(len(first_name) != 0):
@@ -26,5 +26,14 @@ def mod_list_akinhta_idiwkthth(*args):
     con.close()
 
     print_table(result_table,
-                ['ID ακινήτου', 'Εμβαδόν', 'Περιοχή', 'Συντεταγμένες', ['Περιγραφή', 25], ['Επιπρόσθετες πληροφορίες', 25], 'Username Πωλητή'])
+                ['ID ακινήτου', 'Εμβαδόν', 'Περιοχή', 'Συντεταγμένες', ['Περιγραφή', 25], ['Επιπρόσθετες πληροφορίες', 25], 'Τύπος ακινήτου', 'Username Πωλητή'])
 
+def mod_list_mesitika_grafeia(*args):
+    con, cur = connect()
+    result_table = cur.execute(f'SELECT afm, brand_name, brand_address, count(melos_id)'
+                               f'   FROM mesitiko_grafeio JOIN m_pwlhths ON afm = mesitiko_grafeio_afm'
+                               f'   GROUP BY afm'
+                               f'   ORDER BY count(melos_id)').fetchall()
+    con.close()
+    print_table(result_table,
+                ['ΑΦΜ', ['Όνομα', 25], ['Διεύθυνση', 25], 'Εγγεγραμένοι Πωλητές'])
