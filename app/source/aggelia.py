@@ -1,5 +1,8 @@
 from .connect import connect
 from .melos import get_melos_id
+from .tools import promt
+import datetime
+from .melos import is_pwlhths
 
 def does_aggelia_exist(aggelia_id):
     con, cur = connect()
@@ -58,3 +61,32 @@ def search_aggelies_katoikia(kat_type,min_price,max_price,heating_system,min_bat
     ret = cur.execute(sql, ret).fetchall()
     con.close()
     return ret
+
+def create_aggelia(current_user):
+    con, cur = connect()
+    inp = {}
+    inp['akinhto_id'] = input('akinhto_id: ')
+    if not inp['akinhto_id'].isdigit():
+        print('Invalid akinhto ID..')
+        return current_user
+    inp['akinhto_id'] = int(inp['akinhto_id'])
+    inp['pwlhths_id'] = get_melos_id(current_user)
+    cur.execute(f"SELECT * FROM akinhto WHERE diaxhrizetai_pwlhths_id == {inp['pwlhths_id']} and akinhto_id == {inp['akinhto_id']}")
+    if cur.fetchall() == []:
+        print('Cannot create aggelia..')
+        return current_user
+    inp.update(promt('aggelia', ['aggelia_id', 'pwlhths_id', 'akinhto_id', 'created_on', 'modified_on', 'closed_on', 'available_since', 'available']))
+    inp['aggelia_id'] = None
+    now = datetime.datetime.now().strftime('%Y-%m-%d %X')
+    inp['created_on'] = now
+    inp['modified_on'] = now
+    inp['closed_on'] = None
+    inp['available_since'] = now
+    inp['available'] = 1
+    inp['price'] = float(inp['price']) if inp['price'] else None
+    cur.execute('INSERT INTO aggelia VALUES(:aggelia_id, :akinhto_id, :pwlhths_id, :price, :aggelia_type, :created_on,'
+        ':modified_on, :closed_on, :available, :available_since, :text)', inp)
+    con.commit()
+    con.close()
+    print('Successfully created aggelia..')
+    return current_user

@@ -155,5 +155,3 @@ def print_akinhto_full(akinhto_id):
     print_row(akinhto_row_matched[0],
               ['Τετραγωνικά', 'Περιοχή', 'Συντεταγμένες', 'Τύπος ακινήτου', 'Περιγραφή', 'Επιπλέον Πληροφορίες', 'Username Πωλητή', 'Όνομα Ιδιοκτήτη', 'Επώνυμο Ιδιοκτήτη'])
     _print_akinhto_type(akinhto_id, akinhto_type)
-
-
