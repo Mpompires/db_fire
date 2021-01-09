@@ -1,7 +1,29 @@
 from .connect import connect
+from .melos import get_melos_id
+
+def does_aggelia_exist(aggelia_id):
+    con, cur = connect()
+    aggelies_found = cur.execute(f'SELECT count(aggelia_id)'
+                                 f'  FROM aggelia '
+                                 f'  WHERE aggelia_id == "{aggelia_id}"').fetchall()[0][0]
+    con.close()
+    if aggelies_found == 1:
+        return True
+    return False
+
+def does_user_has_edit_privilege_aggelia(username, aggelia_id):
+    pwlhths_id = get_melos_id(username)
+    con, cur = connect()
+    aggelies_found = cur.execute(f'SELECT count(aggelia_id) '
+                                 f'   FROM aggelia '
+                                 f'   WHERE aggelia_id == "{aggelia_id}" AND pwlhths_id = "{pwlhths_id}"').fetchall()[0][0]
+    con.close()
+    if aggelies_found == 1:
+        return True
+    return False
 
 def search_aggelies_katoikia(kat_type,min_price,max_price,heating_system,min_bathrooms,max_bathrooms,min_construction_year,max_construction_year):
-    sql = 'SELECT akinito_id FROM a_katoikia WHERE akinito_id IS NOT NULL'
+    sql = 'SELECT akinhto_id FROM a_katoikia WHERE akinhto_id IS NOT NULL'
     if kat_type == '1':
         sql += ' AND katoikia_type == "monokatoikia"'
     elif kat_type == '2':
@@ -26,7 +48,7 @@ def search_aggelies_katoikia(kat_type,min_price,max_price,heating_system,min_bat
     con, cur = connect()
     ret = cur.execute(sql).fetchall()
     ret = [row[0] for row in ret]
-    sql = 'SELECT a_katoikia.akinito_id, aggelia.aggelia_type, aggelia.price, aggelia.text, a_katoikia.katoikia_type, a_katoikia.heating_system, a_katoikia.bathrooms, a_katoikia.floor, a_katoikia.construction_year FROM a_katoikia LEFT JOIN aggelia ON aggelia.akinito_id == a_katoikia.akinito_id WHERE aggelia_id IS NOT NULL AND a_katoikia.akinito_id IN ({seq})'.format(seq=','.join(['?'] * len(ret)))
+    sql = 'SELECT a_katoikia.akinhto_id, aggelia.aggelia_type, aggelia.price, aggelia.text, a_katoikia.katoikia_type, a_katoikia.heating_system, a_katoikia.bathrooms, a_katoikia.floor, a_katoikia.construction_year FROM a_katoikia LEFT JOIN aggelia ON aggelia.akinhto_id == a_katoikia.akinhto_id WHERE aggelia_id IS NOT NULL AND a_katoikia.akinhto_id IN ({seq})'.format(seq=','.join(['?'] * len(ret)))
     if min_price.isdigit():
         min_price = int(min_price)
         sql += f' AND aggelia.price >= {min_price}'

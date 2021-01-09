@@ -16,4 +16,4 @@ def search(*args):
         min_construction_year = input('-- Contructed after: ')
         max_construction_year = input('-- Constructed before: ')
         tmp = search_aggelies_katoikia(kat_type, min_price, max_price, heating_system, min_bathrooms, max_bathrooms, min_construction_year, max_construction_year)
-        print_table(tmp, ["akinito_id", "aggelia_type", "price", ["aggelia_text",3], "katoikia_type", "heating_system", "bathrooms", "floors", "construction_year"])
+        print_table(tmp, ["akinhto_id", "aggelia_type", "price", ["aggelia_text",3], "katoikia_type", "heating_system", "bathrooms", "floors", "construction_year"])

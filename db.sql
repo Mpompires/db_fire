@@ -1,6 +1,6 @@
 BEGIN TRANSACTION;
 CREATE TABLE IF NOT EXISTS "akinhto" (
-	"akinito_id" INTEGER,
+	"akinhto_id" INTEGER,
 	"surface_area" REAL,
 	"area" TEXT,
 	"area_coords" TEXT,	
@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS "akinhto" (
 	"last_name_idiokthth" TEXT,
 	"akinhto_type" TEXT
 	    CHECK(akinhto_type = "epaggelmatikos_xwros" or akinhto_type = "gh" or akinhto_type = "katoikia"),
-	PRIMARY KEY("akinito_id" AUTOINCREMENT),
+	PRIMARY KEY("akinhto_id" AUTOINCREMENT),
 	FOREIGN KEY("diaxhrizetai_pwlhths_id") REFERENCES "m_pwlhths"("melos_id") ON DELETE CASCADE
 );
 CREATE TABLE IF NOT EXISTS "melos" (
@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS "melos" (
 );
 CREATE TABLE IF NOT EXISTS "aggelia" (
 	"aggelia_id" INTEGER,
-	"akinito_id" INTEGER,
+	"akinhto_id" INTEGER,
 	"pwlhths_id" INTEGER,
 	"price"	REAL,
 	"aggelia_type" TEXT 
@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS "aggelia" (
 	"available_since" TEXT,
 	"text"	TEXT,
 	PRIMARY KEY("aggelia_id" AUTOINCREMENT),
-	FOREIGN KEY("akinito_id") REFERENCES "akinhto"("akinito_id") ON DELETE CASCADE,
+	FOREIGN KEY("akinhto_id") REFERENCES "akinhto"("akinhto_id") ON DELETE CASCADE,
 	FOREIGN KEY("pwlhths_id") REFERENCES "m_pwlhths"("melos_id") ON DELETE CASCADE
 );
 CREATE TABLE IF NOT EXISTS "m_endiaferomenos_endiaferetai" (
@@ -51,23 +51,23 @@ CREATE TABLE IF NOT EXISTS "m_endiaferomenos_endiaferetai" (
     FOREIGN KEY("aggelia_id") REFERENCES "aggelia"("aggelia_id") ON DELETE CASCADE
 );
 CREATE TABLE IF NOT EXISTS "a_epaggelmatikos_xwros" (
-	"akinito_id" INTEGER,
+	"akinhto_id" INTEGER,
 	"parking_spot" INTEGER,
 	"construnction_year" TEXT,
 	"internal" TEXT,
 	"external" TEXT,
-	PRIMARY KEY("akinito_id"),
-	FOREIGN KEY("akinito_id") REFERENCES "akinhto"("akinito_id") ON DELETE CASCADE
+	PRIMARY KEY("akinhto_id"),
+	FOREIGN KEY("akinhto_id") REFERENCES "akinhto"("akinhto_id") ON DELETE CASCADE
 );
 CREATE TABLE IF NOT EXISTS "a_gh" (
-	"akinito_id" INTEGER,
+	"akinhto_id" INTEGER,
 	"building_coeff" REAL,
 	"external" TEXT,
-	PRIMARY KEY("akinito_id"),
-	FOREIGN KEY("akinito_id") REFERENCES "akinhto"("akinito_id") ON DELETE CASCADE
+	PRIMARY KEY("akinhto_id"),
+	FOREIGN KEY("akinhto_id") REFERENCES "akinhto"("akinhto_id") ON DELETE CASCADE
 );
 CREATE TABLE IF NOT EXISTS "a_katoikia" (
-	"akinito_id" INTEGER,
+	"akinhto_id" INTEGER,
 	"katoikia_type"	TEXT
         CHECK(katoikia_type = "monokatoikia" or katoikia_type = "polykatoikia"),
 	"heating_system" TEXT
@@ -77,8 +77,8 @@ CREATE TABLE IF NOT EXISTS "a_katoikia" (
 	"construction_year"	TEXT,
 	"internal" TEXT,
 	"external" TEXT,
-	PRIMARY KEY("akinito_id"),
-	FOREIGN KEY("akinito_id") REFERENCES "akinhto"("akinito_id") ON DELETE CASCADE
+	PRIMARY KEY("akinhto_id"),
+	FOREIGN KEY("akinhto_id") REFERENCES "akinhto"("akinhto_id") ON DELETE CASCADE
 );
 CREATE TABLE IF NOT EXISTS "m_endiaferomenos" (
 	"melos_id" INTEGER,

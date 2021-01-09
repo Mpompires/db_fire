@@ -13,7 +13,7 @@ def mod_list_akinhta_idiwkthth(*args):
     first_name = input("First name of idiwkthth: ")
     last_name = input("Last name of idiwkthth: ")
 
-    queue = (f'SELECT akinito_id, surface_area, area, area_coords, description, extra, akinhto_type, username'
+    queue = (f'SELECT akinhto_id, surface_area, area, area_coords, description, extra, akinhto_type, username'
              f'   FROM akinhto JOIN melos ON diaxhrizetai_pwlhths_id = melos_id'
              f'   WHERE TRUE ')
     if(len(first_name) != 0):
@@ -30,7 +30,7 @@ def mod_list_akinhta_idiwkthth(*args):
 
 def mod_list_mesitika_grafeia(*args):
     con, cur = connect()
-    result_table = cur.execute(f'SELECT mg.afm, mg.brand_name, mg.brand_address, count(DISTINCT p.melos_id), count(DISTINCT ag.aggelia_id), count(DISTINCT ak.akinito_id)'
+    result_table = cur.execute(f'SELECT mg.afm, mg.brand_name, mg.brand_address, count(DISTINCT p.melos_id), count(DISTINCT ag.aggelia_id), count(DISTINCT ak.akinhto_id)'
                                f'  FROM m_pwlhths p '
                                f'   JOIN mesitiko_grafeio mg ON p.mesitiko_grafeio_afm = mg.afm'
                                f'   JOIN aggelia ag ON ag.pwlhths_id = p.melos_id'
@@ -43,7 +43,7 @@ def mod_list_mesitika_grafeia(*args):
 
 def mod_list_pwlhtes(*args):
     con, cur = connect()
-    result_table = cur.execute(f'SELECT username, first_name, last_name, count(DISTINCT ag.aggelia_id), count(DISTINCT ak.akinito_id), brand_name'
+    result_table = cur.execute(f'SELECT username, first_name, last_name, count(DISTINCT ag.aggelia_id), count(DISTINCT ak.akinhto_id), brand_name'
                                f'  FROM m_pwlhths p '
                                f'   JOIN melos m ON p.melos_id = m.melos_id '
                                f'   JOIN mesitiko_grafeio mg ON p.mesitiko_grafeio_afm = mg.afm'
