@@ -36,7 +36,7 @@ def create_akinhto(current_user):
         inp_kat['akinhto_id'] = cur.lastrowid
         inp_kat['bathrooms'] = int(inp_kat['bathrooms']) if inp_kat['bathrooms'] else None
         inp_kat['floor'] = int(inp_kat['floor']) if inp_kat['floor'] else None
-        inp_kat['construction_year'] = int(inp_kat['construction_year'])
+        inp_kat['construction_year'] = int(inp_kat['construction_year']) if inp_kat['construction_year'] else None
         cur.execute('INSERT INTO a_katoikia VALUES(:akinhto_id, :katoikia_type, :heating_system, :bathrooms, :floor,'
             ':construction_year, :internal, :external)', inp_kat)
         con.commit()
