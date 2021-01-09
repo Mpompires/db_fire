@@ -65,7 +65,11 @@ def print_table(table, columns):
 
 
 def print_row(row, columns):
-    max_line_size = 80
+    if len(row) == 0:
+        return None
+    assert(len(row) == len(columns)), "Something wrong with column names"
+
+    max_line_size = 100
     colon = ': '
     for i in range(len(columns)):
         this_column_name_length = len(columns[i] + colon)
