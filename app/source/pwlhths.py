@@ -25,7 +25,7 @@ def list_my_akinhta(username):
     akinhta_found = cur.execute(f'SELECT akinhto_id, akinhto_type, area, surface_area, description'
                                 f'   FROM akinhto'
                                 f'   WHERE diaxhrizetai_pwlhths_id == "{pwlhths_id}"'
-                                f'   ORDER BY akinhto_type, area').fetchall()
+                                f'   ORDER BY akinhto_type, surface_area').fetchall()
     con.close()
 
     akinhta_found = match_column_with_dictionary(akinhta_found, {'epaggelmatikos_xwros':'Επαγγελματικός Χώρος', 'katoikia':'Κατοικία', 'gh': 'Γη'}, 1)
