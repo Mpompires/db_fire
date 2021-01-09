@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS "aggelia" (
 	"pwlhths_id" INTEGER,
 	"price"	REAL,
 	"aggelia_type" TEXT 
-        CHECK(aggelia_type = "enoikiazetai" or aggelia_type = "pwlhtai"),
+        CHECK(aggelia_type = "enoikiazetai" or aggelia_type = "pwleitai"),
 	"created_on" TEXT,
 	"modified_on" TEXT,
 	"closed_on"	TEXT,
