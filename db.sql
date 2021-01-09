@@ -53,7 +53,7 @@ CREATE TABLE IF NOT EXISTS "m_endiaferomenos_endiaferetai" (
 CREATE TABLE IF NOT EXISTS "a_epaggelmatikos_xwros" (
 	"akinhto_id" INTEGER,
 	"parking_spot" INTEGER,
-	"construnction_year" TEXT,
+	"construction_year" INTEGER,
 	"internal" TEXT,
 	"external" TEXT,
 	PRIMARY KEY("akinhto_id"),
@@ -74,7 +74,7 @@ CREATE TABLE IF NOT EXISTS "a_katoikia" (
         CHECK(heating_system = "autonomh" or heating_system = "kentrikh"),
 	"bathrooms"	INTEGER,
 	"floor"	INTEGER,
-	"construction_year"	TEXT,
+	"construction_year"	INTEGER,
 	"internal" TEXT,
 	"external" TEXT,
 	PRIMARY KEY("akinhto_id"),

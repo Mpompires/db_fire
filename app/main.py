@@ -1,6 +1,7 @@
 from source.signup import signup
 from source.search import search
 from source.login import login
+from source.akinhto import create_akinhto
 from source.melos import is_mod, is_pwlhths
 from source.pwlhths import list_my_aggelies, list_my_akinhta
 from source.signup_pwlhths import signup_pwlhths
@@ -23,7 +24,8 @@ options = {
     'mod_sign_as': mod_sign_as,
     'mod_list_akinhta_idiwkthth': mod_list_akinhta_idiwkthth,
     'mod_list_mesitika_grafeia' : mod_list_mesitika_grafeia,
-    'mod_list_pwlhtes': mod_list_pwlhtes
+    'mod_list_pwlhtes': mod_list_pwlhtes,
+    'crak': create_akinhto
 }
 
 def check(option):
@@ -67,8 +69,14 @@ def check(option):
         if not is_mod(current_user):
             print('No permission :/')
             return False
+    elif option == 'crak':
+        if current_user is None:
+            print('Not logged in..')
+            return False
+        elif not is_pwlhths(current_user):
+            print('You need to sign up as pwlhths..')
+            return False
     return True
-
 
 while True:
     option = input(f'{current_user}> ')
