@@ -74,9 +74,12 @@ def create_akinhto(current_user):
     con.close()
     return current_user
 
-def about_akinhto_input(username):
+def about_akinhto_of_pwlhth(username):
     akinhto_id = input("Akinhto_id: ")
-    about_akinhto_arg(username, akinhto_id)
+    if does_user_has_edit_privilege_aggelia(username, akinhto_id):
+        print_akinhto_full(akinhto_id)
+    else:
+        print("You don't have such akinhto..")
 
 def about_akinhto_arg(username, akinhto_id):
     if not does_akinhto_exist(akinhto_id):
@@ -100,7 +103,7 @@ def _print_katoikia(akinhto_id):
 
 def _print_epaggelmatikos_xwros(akinhto_id):
     con, cur = connect()
-    epgxwr_row = cur.execute(f'SELECT parking_spot, construnction_year, internal, "external"'
+    epgxwr_row = cur.execute(f'SELECT parking_spot, construction_year, internal, "external"'
                              f'   FROM a_epaggelmatikos_xwros'
                              f'   WHERE akinhto_id = {akinhto_id}').fetchall()
     con.close()
@@ -152,5 +155,3 @@ def print_akinhto_full(akinhto_id):
     print_row(akinhto_row_matched[0],
               ['Τετραγωνικά', 'Περιοχή', 'Συντεταγμένες', 'Τύπος ακινήτου', 'Περιγραφή', 'Επιπλέον Πληροφορίες', 'Username Πωλητή', 'Όνομα Ιδιοκτήτη', 'Επώνυμο Ιδιοκτήτη'])
     _print_akinhto_type(akinhto_id, akinhto_type)
-
-
