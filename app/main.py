@@ -1,6 +1,7 @@
 from source.signup import signup
 from source.search import search
 from source.login import login
+from source.aggelia import about_aggelia
 from source.akinhto import create_akinhto, about_akinhto_of_pwlhth
 from source.melos import is_mod, is_pwlhths
 from source.pwlhths import list_my_aggelies, list_my_akinhta
@@ -23,12 +24,13 @@ options = {
     'lsag': list_my_aggelies,
     'lsak': list_my_akinhta,
     'crak': create_akinhto,
+    'crag': create_aggelia,
     'abak': about_akinhto_of_pwlhth,
+    'abag': about_aggelia,
     'mod_sign_as': mod_sign_as,
     'mod_list_akinhta_idiwkthth': mod_list_akinhta_idiwkthth,
     'mod_list_mesitika_grafeia' : mod_list_mesitika_grafeia,
-    'mod_list_pwlhtes': mod_list_pwlhtes,
-    'crag': create_aggelia
+    'mod_list_pwlhtes': mod_list_pwlhtes
 }
 
 def check(option):
