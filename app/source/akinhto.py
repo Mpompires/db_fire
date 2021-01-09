@@ -14,6 +14,9 @@ def does_akinhto_exist(akinhto_id):
     return False
 
 def _is_user_akinhto_manager(username, akinhto_id):
+    if username is None:
+        return False
+
     pwlhths_id = get_melos_id(username)
     con, cur = connect()
     aggelies_found = cur.execute(f'SELECT count(akinhto_id) '
@@ -70,6 +73,18 @@ def create_akinhto(current_user):
         print('Invalid akinhto_type..')
     con.close()
     return current_user
+
+def about_akinhto_input(username):
+    akinhto_id = input("Akinhto_id: ")
+    about_akinhto_arg(username, akinhto_id)
+
+def about_akinhto_arg(username, akinhto_id):
+    if not does_akinhto_exist(akinhto_id):
+        print("No such akinhto")
+    elif does_user_has_edit_privilege_aggelia(username, akinhto_id):
+        print_akinhto_full(akinhto_id)
+    else:
+        print_akinhto(akinhto_id)
 
 def _print_katoikia(akinhto_id):
     con, cur = connect()
@@ -137,3 +152,5 @@ def print_akinhto_full(akinhto_id):
     print_row(akinhto_row_matched[0],
               ['Τετραγωνικά', 'Περιοχή', 'Συντεταγμένες', 'Τύπος ακινήτου', 'Περιγραφή', 'Επιπλέον Πληροφορίες', 'Username Πωλητή', 'Όνομα Ιδιοκτήτη', 'Επώνυμο Ιδιοκτήτη'])
     _print_akinhto_type(akinhto_id, akinhto_type)
+
+
