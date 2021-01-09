@@ -1,6 +1,7 @@
 from .connect import connect
-from .melos import get_melos_id
 from .tools import promt
+from .melos import get_melos_id, is_mod
+from .printer import print_row, match_column_with_dictionary
 
 def does_akinhto_exist(akinhto_id):
     con, cur = connect()
@@ -12,14 +13,19 @@ def does_akinhto_exist(akinhto_id):
         return True
     return False
 
-def does_user_has_edit_privilege_aggelia(username, akinhto_id):
+def _is_user_akinhto_manager(username, akinhto_id):
     pwlhths_id = get_melos_id(username)
     con, cur = connect()
     aggelies_found = cur.execute(f'SELECT count(akinhto_id) '
                                  f'   FROM akinhto '
-                                 f'   WHERE akinhto_id == "{akinhto_id}" AND diaxhrizetai_pwlhths_id = "{pwlhths_id}"').fetchall()[0][0]
+                                 f'   WHERE akinhto_id = "{akinhto_id}" AND diaxhrizetai_pwlhths_id = "{pwlhths_id}"').fetchall()[0][0]
     con.close()
     if aggelies_found == 1:
+        return True
+    return False
+
+def does_user_has_edit_privilege_aggelia(username, akinhto_id):
+    if _is_user_akinhto_manager(username, akinhto_id) or is_mod(username):
         return True
     return False
 
@@ -64,3 +70,70 @@ def create_akinhto(current_user):
         print('Invalid akinhto_type..')
     con.close()
     return current_user
+
+def _print_katoikia(akinhto_id):
+    con, cur = connect()
+    katoikia_row = cur.execute(f'SELECT katoikia_type, heating_system, bathrooms, floor, construction_year, internal, "external"'
+                               f'   FROM a_katoikia'
+                               f'   WHERE akinhto_id = {akinhto_id}').fetchall()
+    con.close()
+
+    katoikia_row = match_column_with_dictionary(katoikia_row, {'polykatoikia':'Πολυκατοικία', 'monokatoikia':'Μονοκατοικία'}, 0)
+    katoikia_row = match_column_with_dictionary(katoikia_row, {'autonomh':'Αυτόνομη', 'kentrikh':'Κεντρική'}, 1)
+    print_row(katoikia_row[0],
+              ['Τύπος κατοικίας', 'Σύστημα θέρμανσης', 'Μπάνια', 'Όροφος', 'Έτος κατασκευής', 'Εσωτερικά', 'Εξωτερικά'])
+
+def _print_epaggelmatikos_xwros(akinhto_id):
+    con, cur = connect()
+    epgxwr_row = cur.execute(f'SELECT parking_spot, construnction_year, internal, "external"'
+                             f'   FROM a_epaggelmatikos_xwros'
+                             f'   WHERE akinhto_id = {akinhto_id}').fetchall()
+    con.close()
+
+    epgxwr_row = match_column_with_dictionary(epgxwr_row, {0:'Όχι', 1:'Ναί'}, 0)
+    print_row(epgxwr_row[0],
+              ['Χώρος Στάθμεσης', 'Έτος κατασκευής', 'Εσωτερικά', 'Εξωτερικά'])
+
+def _print_gh(akinhto_id):
+    con, cur = connect()
+    gh_row =cur.execute(f'SELECT building_coeff, "external"'
+                        f'   FROM a_gh'
+                        f'   WHERE akinhto_id = {akinhto_id}').fetchall()
+    con.close()
+
+    print_row(gh_row[0],
+              ['Συντελεστής Δόμησης', 'Εξωτερικά'])
+
+def _print_akinhto_type(akinhto_id, akinhto_type):
+    if akinhto_type == 'katoikia':
+        _print_katoikia(akinhto_id)
+    elif akinhto_type == 'epaggelmatikos_xwros':
+        _print_epaggelmatikos_xwros(akinhto_id)
+    elif akinhto_type == 'gh':
+        _print_gh(akinhto_id)
+
+def print_akinhto(akinhto_id):
+    con, cur = connect()
+    akinhto_row =cur.execute(f'SELECT surface_area, area, area_coords, akinhto_type, description, extra'
+                             f'   FROM akinhto'
+                             f'   WHERE akinhto_id = {akinhto_id}').fetchall()
+    con.close()
+    akinhto_type = akinhto_row[0][3]
+
+    akinhto_row_matched = match_column_with_dictionary(akinhto_row, {'epaggelmatikos_xwros':'Επαγγελματικός Χώρος', 'katoikia':'Κατοικία', 'gh': 'Γη'}, 3)
+    print_row(akinhto_row_matched[0],
+              ['Τετραγωνικά', 'Περιοχή', 'Συντεταγμένες', 'Τύπος ακινήτου', 'Περιγραφή', 'Επιπλέον Πληροφορίες'])
+    _print_akinhto_type(akinhto_id, akinhto_type)
+
+def print_akinhto_full(akinhto_id):
+    con, cur = connect()
+    akinhto_row =cur.execute(f'SELECT surface_area, area, area_coords, akinhto_type, description, extra, username, first_name_idiokthth, last_name_idiokthth'
+                             f'   FROM akinhto JOIN melos ON diaxhrizetai_pwlhths_id = melos_id' 
+                             f'   WHERE akinhto_id = {akinhto_id}').fetchall()
+    con.close()
+    akinhto_type = akinhto_row[0][3]
+
+    akinhto_row_matched = match_column_with_dictionary(akinhto_row, {'epaggelmatikos_xwros':'Επαγγελματικός Χώρος', 'katoikia':'Κατοικία', 'gh': 'Γη'}, 3)
+    print_row(akinhto_row_matched[0],
+              ['Τετραγωνικά', 'Περιοχή', 'Συντεταγμένες', 'Τύπος ακινήτου', 'Περιγραφή', 'Επιπλέον Πληροφορίες', 'Username Πωλητή', 'Όνομα Ιδιοκτήτη', 'Επώνυμο Ιδιοκτήτη'])
+    _print_akinhto_type(akinhto_id, akinhto_type)
