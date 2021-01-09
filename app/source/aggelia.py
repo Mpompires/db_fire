@@ -1,8 +1,9 @@
-from .connect import connect
-from .melos import get_melos_id
-from .tools import promt
 import datetime
-from .melos import is_pwlhths
+from .connect import connect
+from .tools import promt
+from .melos import get_melos_id, is_mod, is_pwlhths
+from .printer import print_row, match_column_with_dictionary
+from .akinhto import about_akinhto_arg
 
 def does_aggelia_exist(aggelia_id):
     con, cur = connect()
@@ -14,7 +15,10 @@ def does_aggelia_exist(aggelia_id):
         return True
     return False
 
-def does_user_has_edit_privilege_aggelia(username, aggelia_id):
+def _is_user_aggelia_manager(username, aggelia_id):
+    if username is None:
+        return False
+
     pwlhths_id = get_melos_id(username)
     con, cur = connect()
     aggelies_found = cur.execute(f'SELECT count(aggelia_id) '
@@ -22,6 +26,11 @@ def does_user_has_edit_privilege_aggelia(username, aggelia_id):
                                  f'   WHERE aggelia_id == "{aggelia_id}" AND pwlhths_id = "{pwlhths_id}"').fetchall()[0][0]
     con.close()
     if aggelies_found == 1:
+        return True
+    return False
+
+def does_user_has_edit_privilege_aggelia(username, aggelia_id):
+    if _is_user_aggelia_manager(username, aggelia_id) or is_mod(username):
         return True
     return False
 
@@ -90,3 +99,27 @@ def create_aggelia(current_user):
     con.close()
     print('Successfully created aggelia..')
     return current_user
+
+def about_aggelia(username):
+    aggelia_id = input('Aggelia_id: ')
+    if does_aggelia_exist(aggelia_id):
+        print_aggelia(username, aggelia_id)
+    else:
+        print('No such aggelia')
+
+def print_aggelia(username, aggelia_id):
+    con, cur = connect()
+    akinhto_row =cur.execute(f'SELECT akinhto_id, aggelia_type, price, created_on, modified_on, closed_on, available, available_since, text'
+                             f'   FROM aggelia'
+                             f'   WHERE aggelia_id = {aggelia_id}').fetchall()
+    con.close()
+
+    print('---Αγγελία---')
+    akinhto_row = match_column_with_dictionary(akinhto_row, {'enoikiazetai':'Ενοικιάζεται', 'pwleitai':'Πωλείται'}, 1)
+    akinhto_row = match_column_with_dictionary(akinhto_row, {0:'Όχι', 1:'Ναί'}, 6)
+    print_row(akinhto_row[0],
+              ['ID ακινήτου', 'Πωλ./Ενοικ.', 'Τιμή', 'Δημιουργήθηκε', 'Τροποποιήθηκε', 'Έκλεισε', 'Διαθέσιμο', 'Διαθέσιμο από', 'Σημειώσεις'])
+
+    print('---Ακίνητο---')
+    about_akinhto_arg(username, akinhto_row[0][0])
+
