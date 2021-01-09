@@ -51,8 +51,8 @@ def create_akinhto(current_user):
         cur.execute('INSERT INTO akinhto VALUES(:akinhto_id, :surface_area, :area, :area_coords,'
             ':description, :extra, :diaxhrizetai_pwlhths_id, :first_name_idiokthth, :last_name_idiokthth, :akinhto_type)', inp)
         inp_epx = promt('a_epaggelmatikos_xwros', ['akinhto_id'])
-        inp_epx['parking_spot'] = int(inp_epx['parking_spot']) if inp_exp['parking_spot'] else None
-        inp_epx['construction_year'] = int(inp_epx['construction_year']) if inp_exp['construction_year'] else None
+        inp_epx['parking_spot'] = int(inp_epx['parking_spot']) if inp_epx['parking_spot'] else None
+        inp_epx['construction_year'] = int(inp_epx['construction_year']) if inp_epx['construction_year'] else None
         inp_epx['akinhto_id'] = cur.lastrowid
         cur.execute('INSERT INTO a_epaggelmatikos_xwros VALUES(:akinhto_id, :parking_spot, :construction_year, :internal, :external)', inp_epx)
         con.commit()
