@@ -34,6 +34,8 @@ def get_melos_id(username):
     return melos_id
 
 def is_mod(username):
+    if username is None:
+        return False
     con, cur = connect()
     is_mod_int = cur.execute(f'SELECT is_mod FROM melos WHERE username == "{username}"').fetchall()[0][0]
     con.close()
