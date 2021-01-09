@@ -65,6 +65,7 @@ def check(option):
             print('You need to sign up as pwlhths or mod..')
             return False
     elif option == 'crak' \
+       or option == 'crag' \
        or option == 'lsag' \
        or option == 'lsak':
         if current_user is None:
@@ -82,13 +83,6 @@ def check(option):
             return False
         if not is_mod(current_user):
             print('No permission :/')
-            return False
-    elif option == 'crag':
-        if current_user is None:
-            print('Not logged in..')
-            return False
-        if not is_pwlhths(current_user):
-            print('You need to sign up as pwlhths..')
             return False
     return True
 
