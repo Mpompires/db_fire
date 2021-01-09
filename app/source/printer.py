@@ -84,3 +84,11 @@ def print_row(row, columns):
 
         print(out, end='')
 
+
+def match_column_with_dictionary(table, dict, col_index):
+    res_table = [list(row) for row in table]
+    for i in range(len(table)):
+        search_result = dict.get(table[i][col_index])
+        if search_result is not None:
+            res_table[i][col_index] = search_result
+    return res_table
