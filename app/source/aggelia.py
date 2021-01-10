@@ -70,7 +70,7 @@ def search_aggelies_katoikia(kat_type,min_price,max_price,heating_system,min_bat
     con, cur = connect()
     ret = cur.execute(sql).fetchall()
     ret = [row[0] for row in ret]
-    sql = 'SELECT a_katoikia.akinhto_id, aggelia.aggelia_type, aggelia.price, aggelia.text, a_katoikia.katoikia_type, a_katoikia.heating_system, a_katoikia.bathrooms, a_katoikia.floor, a_katoikia.construction_year FROM a_katoikia LEFT JOIN aggelia ON aggelia.akinhto_id == a_katoikia.akinhto_id WHERE aggelia_id IS NOT NULL AND a_katoikia.akinhto_id IN ({seq})'.format(seq=','.join(['?'] * len(ret)))
+    sql = 'SELECT aggelia.aggelia_id, aggelia.aggelia_type, aggelia.price, aggelia.text, a_katoikia.katoikia_type, a_katoikia.heating_system, a_katoikia.bathrooms, a_katoikia.floor, a_katoikia.construction_year FROM a_katoikia LEFT JOIN aggelia ON aggelia.akinhto_id == a_katoikia.akinhto_id WHERE aggelia_id IS NOT NULL AND a_katoikia.akinhto_id IN ({seq})'.format(seq=','.join(['?'] * len(ret)))
     if min_price.isdigit():
         min_price = int(min_price)
         sql += f' AND aggelia.price >= {min_price}'
