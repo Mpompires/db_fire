@@ -1,3 +1,4 @@
+from source.connect import create_db_if_not_exist
 from source.signup import signup
 from source.search import search
 from source.login import login
@@ -7,7 +8,7 @@ from source.melos import is_mod, is_pwlhths, is_endiaferomenos
 from source.endiaferomenos import signup_endiaferomenos, endiaferetai_for_aggelia
 from source.pwlhths import list_my_aggelies, list_my_akinhta
 from source.signup_pwlhths import signup_pwlhths
-from source.mod_tools import mod_sign_as, mod_list_akinhta_idiokthth, mod_list_mesitika_grafeia, mod_list_pwlhtes
+from source.mod_tools import add_root_if_not_exist, mod_sign_as, mod_list_akinhta_idiokthth, mod_list_mesitika_grafeia, mod_list_pwlhtes
 from source.aggelia import create_aggelia
 
 current_user = None
@@ -102,6 +103,9 @@ def check(option):
             print('No permission :/')
             return False
     return True
+
+create_db_if_not_exist()
+add_root_if_not_exist()
 
 while True:
     option = input(f'{current_user}> ')
