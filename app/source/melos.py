@@ -51,10 +51,36 @@ def is_pwlhths(username):
         return True
     return False
 
+def is_freelancer(username):
+    con, cur = connect()
+    freelancer_count = cur.execute(f'SELECT count(*) '
+                                   f'  FROM melos m JOIN m_pwlhths p ON m.melos_id = p.melos_id'
+                                   f'  WHERE m.username = "{username}" AND p.mesitiko_grafeio_afm = 0').fetchall()[0][0]
+    con.close()
+    if freelancer_count == 1:
+        return True
+    return False
+
+def is_endiaferomenos(username):
+    con, cur = connect()
+    is_endiaferomenos_int = cur.execute(f'SELECT is_endiaferomenos FROM melos WHERE username == "{username}"').fetchall()[0][0]
+    con.close()
+    if is_endiaferomenos_int == 1:
+        return True
+    return False
+
 def become_pwlhths(username, telephone, afm_mesitikou):
     con, cur = connect()
     melos_id = get_melos_id(username)
     cur.execute(f'INSERT INTO m_pwlhths VALUES ({melos_id}, {telephone}, {afm_mesitikou})')
     cur.execute(f'UPDATE melos SET is_pwlhths = 1 WHERE username == "{username}"')
+    con.commit()
+    con.close()
+
+def become_endiaferomenos(username):
+    con, cur = connect()
+    melos_id = get_melos_id(username)
+    cur.execute(f'INSERT INTO m_endiaferomenos VALUES ({melos_id})')
+    cur.execute(f'UPDATE melos SET is_endiaferomenos = 1 WHERE username == "{username}"')
     con.commit()
     con.close()

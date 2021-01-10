@@ -1,6 +1,6 @@
 from .connect import connect
-from .melos import get_melos_id
-from .printer import print_table, match_column_with_dictionary
+from .melos import get_melos_id, is_freelancer
+from .printer import print_table, print_row, match_column_with_dictionary
 
 def list_my_aggelies(username):
     pwlhths_id = get_melos_id(username)
@@ -31,3 +31,20 @@ def list_my_akinhta(username):
     akinhta_found = match_column_with_dictionary(akinhta_found, {'epaggelmatikos_xwros':'Επαγγελματικός Χώρος', 'katoikia':'Κατοικία', 'gh': 'Γη'}, 1)
     print_table(akinhta_found,
                 ['ID Ακινήτου', 'Τύπος ακινήτου', 'Περιοχή', 'Τετραγωνικά', ['Περιγραφή', 30]])
+
+def print_contact_info(username):
+    con, cur = connect()
+    if is_freelancer(username):
+        info_row = cur.execute(f'SELECT m.melos_id, first_name, last_name, telephone, email'
+                               f'   FROM melos m JOIN m_pwlhths p ON m.melos_id = p.melos_id'
+                               f'   WHERE m.username = "{username}"').fetchall()
+        print_row(info_row[0],
+                  ['ID', 'Όνομα', 'Επώνυμο', 'Τηλέφωνο', 'e-mail'])
+    else:
+
+        info_row = cur.execute(f'SELECT m.melos_id, first_name, last_name, telephone, email, brand_name, brand_address'
+                               f'   FROM melos m JOIN m_pwlhths p ON m.melos_id = p.melos_id JOIN mesitiko_grafeio m_g ON p.mesitiko_grafeio_afm = m_g.afm'
+                               f'   WHERE m.username = "{username}"').fetchall()
+        print_row(info_row[0],
+                  ['ID', 'Όνομα', 'Επώνυμο', 'Τηλέφωνο', 'e-mail', 'Μεσιτικό γραφείο', 'Διεύθυνση μεσισικού γραφείου'])
+    con.close()

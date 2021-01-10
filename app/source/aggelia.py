@@ -4,6 +4,8 @@ from .tools import promt
 from .melos import get_melos_id, is_mod, is_pwlhths
 from .printer import print_row, match_column_with_dictionary
 from .akinhto import about_akinhto_arg
+from .pwlhths import print_contact_info
+from .endiaferomenos import does_endiaferomenos_endiaferetai
 
 def does_aggelia_exist(aggelia_id):
     con, cur = connect()
@@ -14,6 +16,14 @@ def does_aggelia_exist(aggelia_id):
     if aggelies_found == 1:
         return True
     return False
+
+def _get_aggelia_manager_username(aggelia_id):
+    con, cur = connect()
+    pwlhths_username = cur.execute(f'SELECT username'
+                                   f' FROM melos m JOIN aggelia ag ON m.melos_id = ag.pwlhths_id'
+                                   f' WHERE ag.aggelia_id = "{aggelia_id}"').fetchall()[0][0]
+    con.close()
+    return pwlhths_username
 
 def _is_user_aggelia_manager(username, aggelia_id):
     if username is None:
@@ -111,7 +121,7 @@ def print_aggelia(username, aggelia_id):
     con, cur = connect()
     akinhto_row =cur.execute(f'SELECT akinhto_id, aggelia_type, price, created_on, modified_on, closed_on, available, available_since, text'
                              f'   FROM aggelia'
-                             f'   WHERE aggelia_id = {aggelia_id}').fetchall()
+                             f'   WHERE aggelia_id = "{aggelia_id}"').fetchall()
     con.close()
 
     print('---Αγγελία---')
@@ -122,4 +132,11 @@ def print_aggelia(username, aggelia_id):
 
     print('---Ακίνητο---')
     about_akinhto_arg(username, akinhto_row[0][0])
+
+    print('---Στοιχεία Επικοινωνίας---')
+    if does_endiaferomenos_endiaferetai(username, aggelia_id) or does_user_has_edit_privilege_aggelia(username, aggelia_id):
+        pwlhths_username = _get_aggelia_manager_username(aggelia_id)
+        print_contact_info(pwlhths_username)
+    else:
+        print("You should show interest to this aggelia in order to get contact infos")
 

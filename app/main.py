@@ -3,10 +3,11 @@ from source.search import search
 from source.login import login
 from source.aggelia import about_aggelia
 from source.akinhto import create_akinhto, about_akinhto_of_pwlhth
-from source.melos import is_mod, is_pwlhths
+from source.melos import is_mod, is_pwlhths, is_endiaferomenos
+from source.endiaferomenos import signup_endiaferomenos, endiaferetai_for_aggelia
 from source.pwlhths import list_my_aggelies, list_my_akinhta
 from source.signup_pwlhths import signup_pwlhths
-from source.mod_tools import mod_sign_as, mod_list_akinhta_idiwkthth, mod_list_mesitika_grafeia, mod_list_pwlhtes
+from source.mod_tools import mod_sign_as, mod_list_akinhta_idiokthth, mod_list_mesitika_grafeia, mod_list_pwlhtes
 from source.aggelia import create_aggelia
 
 current_user = None
@@ -21,14 +22,16 @@ options = {
     'lout': logout,
     's': search,
     'sinp': signup_pwlhths,
+    'sine': signup_endiaferomenos,
     'lsag': list_my_aggelies,
     'lsak': list_my_akinhta,
     'crak': create_akinhto,
     'crag': create_aggelia,
     'abak': about_akinhto_of_pwlhth,
     'abag': about_aggelia,
+    'enag': endiaferetai_for_aggelia,
     'mod_sign_as': mod_sign_as,
-    'mod_list_akinhta_idiwkthth': mod_list_akinhta_idiwkthth,
+    'mod_list_akinhta_idiokthth': mod_list_akinhta_idiokthth,
     'mod_list_mesitika_grafeia' : mod_list_mesitika_grafeia,
     'mod_list_pwlhtes': mod_list_pwlhtes
 }
@@ -57,12 +60,26 @@ def check(option):
         if is_pwlhths(current_user):
             print('Already pwlhths')
             return False
+    elif option == 'sine':
+        if current_user is None:
+            print('Not logged in..')
+            return False
+        if is_endiaferomenos(current_user):
+            print('Already endiaferomenos')
+            return False
     elif option == 'abak':
         if current_user is None:
             print('Not logged in..')
             return False
         elif not is_pwlhths(current_user) and not is_mod(current_user):
             print('You need to sign up as pwlhths or mod..')
+            return False
+    elif option == 'enag':
+        if current_user is None:
+            print('Not logged in..')
+            return False
+        elif not is_endiaferomenos(current_user):
+            print('You need to become endiaferomenos..')
             return False
     elif option == 'crak' \
        or option == 'crag' \
@@ -75,7 +92,7 @@ def check(option):
             print('You need to sign up as pwlhths..')
             return False
     elif option == 'mod_sign_as' \
-      or option == 'mod_list_akinhta_idiwkthth' \
+      or option == 'mod_list_akinhta_idiokthth' \
       or option == 'mod_list_mesitika_grafeia' \
       or option == 'mod_list_pwlhtes':
         if current_user is None:

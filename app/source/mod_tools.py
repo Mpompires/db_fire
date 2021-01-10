@@ -9,9 +9,9 @@ def mod_sign_as(*args):
     else:
         return as_username
 
-def mod_list_akinhta_idiwkthth(*args):
-    first_name = input("First name of idiwkthth: ")
-    last_name = input("Last name of idiwkthth: ")
+def mod_list_akinhta_idiokthth(*args):
+    first_name = input("First name of idiokthth: ")
+    last_name = input("Last name of idiokthth: ")
 
     queue = (f'SELECT akinhto_id, surface_area, area, area_coords, description, extra, akinhto_type, username'
              f'   FROM akinhto JOIN melos ON diaxhrizetai_pwlhths_id = melos_id'
