@@ -8,7 +8,7 @@ from source.melos import is_mod, is_pwlhths, is_endiaferomenos
 from source.endiaferomenos import signup_endiaferomenos, endiaferetai_for_aggelia
 from source.pwlhths import list_my_aggelies, list_my_akinhta
 from source.signup_pwlhths import signup_pwlhths
-from source.mod_tools import add_root_if_not_exist, mod_sign_as, mod_list_akinhta_idiokthth, mod_list_mesitika_grafeia, mod_list_pwlhtes
+from source.mod_tools import add_root_if_not_exist, mod_sign_as, mod_appoint_new_mod, mod_list_akinhta_idiokthth, mod_list_mesitika_grafeia, mod_list_pwlhtes
 from source.aggelia import create_aggelia
 
 current_user = None
@@ -32,6 +32,7 @@ options = {
     'abag': about_aggelia,
     'enag': endiaferetai_for_aggelia,
     'mod_sign_as': mod_sign_as,
+    'mod_appoint_new_mod': mod_appoint_new_mod,
     'mod_list_akinhta_idiokthth': mod_list_akinhta_idiokthth,
     'mod_list_mesitika_grafeia' : mod_list_mesitika_grafeia,
     'mod_list_pwlhtes': mod_list_pwlhtes
@@ -93,6 +94,7 @@ def check(option):
             print('You need to sign up as pwlhths..')
             return False
     elif option == 'mod_sign_as' \
+      or option == 'mod_appoint_new_mod'\
       or option == 'mod_list_akinhta_idiokthth' \
       or option == 'mod_list_mesitika_grafeia' \
       or option == 'mod_list_pwlhtes':

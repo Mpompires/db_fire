@@ -8,7 +8,7 @@ def signup(*args):
     email = input('Email: ')
     first_name = input('First Name: ')
     last_name = input('Last Name: ')
-    is_endiaferomenos = 1
+    is_endiaferomenos = 0
     is_pwlhths = 0
     is_mod = 0
     row = (None, username, password, email, first_name, last_name, is_endiaferomenos, is_pwlhths, is_mod)

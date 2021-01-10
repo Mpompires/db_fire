@@ -29,6 +29,18 @@ def mod_sign_as(*args):
     else:
         return as_username
 
+def mod_appoint_new_mod(*args):
+    username_of_new_mod = input("Username of new mod: ")
+    if not does_username_exist(username_of_new_mod):
+        print("No such user..")
+    elif is_mod(username_of_new_mod):
+        print("User is already a mod")
+    else:
+        con, cur = connect()
+        cur.execute(f'UPDATE melos SET is_mod = 1 WHERE username == "{username_of_new_mod}"')
+        con.commit()
+        con.close()
+
 def mod_list_akinhta_idiokthth(*args):
     first_name = input("First name of idiokthth: ")
     last_name = input("Last name of idiokthth: ")
