@@ -44,7 +44,7 @@ def does_user_has_edit_privilege_aggelia(username, aggelia_id):
         return True
     return False
 
-def search_aggelies_katoikia(kat_type,min_price,max_price,heating_system,min_bathrooms,max_bathrooms,min_construction_year,max_construction_year):
+def search_aggelies_katoikia(kat_type,min_price,max_price,heating_system,min_bathrooms,max_bathrooms,min_construction_year,max_construction_year, en_pol):
     sql = 'SELECT akinhto_id FROM a_katoikia WHERE akinhto_id IS NOT NULL'
     if kat_type == '1':
         sql += ' AND katoikia_type == "monokatoikia"'
@@ -76,6 +76,10 @@ def search_aggelies_katoikia(kat_type,min_price,max_price,heating_system,min_bat
     if max_price.isdigit():
         max_price = int(max_price)
         sql += f' AND aggelia.price <= {max_price}'
+    if en_pol == '1':
+        sql += f' AND aggelia.aggelia_type == "enoikiazetai"'
+    elif en_pol == '2':
+        sql += f' AND aggelia.aggelia_type == "pwlhtai"'
     sql += ' ORDER BY aggelia.price'
     ret = cur.execute(sql, ret).fetchall()
     con.close()
