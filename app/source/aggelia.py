@@ -66,11 +66,32 @@ def search_aggelies_katoikia(kat_type,min_price,max_price,heating_system,min_bat
     if max_construction_year.isdigit():
         max_construction_year = int(max_construction_year)
         sql += f' AND construction_year <= {max_construction_year}'
-
     con, cur = connect()
     ret = cur.execute(sql).fetchall()
     ret = [row[0] for row in ret]
     sql = 'SELECT aggelia.aggelia_id, aggelia.aggelia_type, aggelia.price, aggelia.text, a_katoikia.katoikia_type, a_katoikia.heating_system, a_katoikia.bathrooms, a_katoikia.floor, a_katoikia.construction_year FROM a_katoikia LEFT JOIN aggelia ON aggelia.akinhto_id == a_katoikia.akinhto_id WHERE aggelia_id IS NOT NULL AND a_katoikia.akinhto_id IN ({seq})'.format(seq=','.join(['?'] * len(ret)))
+    if min_price.isdigit():
+        min_price = int(min_price)
+        sql += f' AND aggelia.price >= {min_price}'
+    if max_price.isdigit():
+        max_price = int(max_price)
+        sql += f' AND aggelia.price <= {max_price}'
+    ret = cur.execute(sql, ret).fetchall()
+    con.close()
+    return ret
+
+def search_aggelies_epaggelmatikos_xwros(min_price, max_price, min_construction_year, max_construction_year):
+    sql = 'SELECT akinhto_id FROM a_epaggelmatikos_xwros WHERE akinhto_id IS NOT NULL'
+    if min_construction_year.isdigit():
+        min_construction_year = int(min_construction_year)
+        sql += f' AND construction_year >= {min_construction_year}'
+    if max_construction_year.isdigit():
+        max_construction_year = int(max_construction_year)
+        sql += f' AND construction_year <= {max_construction_year}'
+    con, cur = connect()
+    ret = cur.execute(sql).fetchall()
+    ret = [row[0] for row in ret]
+    sql = 'SELECT aggelia.aggelia_id, aggelia.aggelia_type, aggelia.price, aggelia.text, a_epaggelmatikos_xwros.parking_spot, a_epaggelmatikos_xwros.construction_year, a_epaggelmatikos_xwros.internal, a_epaggelmatikos_xwros.external FROM a_epaggelmatikos_xwros LEFT JOIN aggelia ON aggelia.akinhto_id == a_epaggelmatikos_xwros.akinhto_id WHERE aggelia_id IS NOT NULL AND a_epaggelmatikos_xwros.akinhto_id IN ({seq})'.format(seq=','.join(['?'] * len(ret)))
     if min_price.isdigit():
         min_price = int(min_price)
         sql += f' AND aggelia.price >= {min_price}'
