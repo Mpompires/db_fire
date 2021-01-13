@@ -10,6 +10,7 @@ from source.pwlhths import list_my_aggelies, list_my_akinhta
 from source.signup_pwlhths import signup_pwlhths
 from source.mod_tools import add_root_if_not_exist, mod_sign_as, mod_appoint_new_mod, mod_list_akinhta_idiokthth, mod_list_mesitika_grafeia, mod_list_pwlhtes
 from source.aggelia import create_aggelia
+from source.melos import get_aggelies_endiaferomenos
 
 current_user = None
 
@@ -35,7 +36,8 @@ options = {
     'mod_appoint_new_mod': mod_appoint_new_mod,
     'mod_list_akinhta_idiokthth': mod_list_akinhta_idiokthth,
     'mod_list_mesitika_grafeia' : mod_list_mesitika_grafeia,
-    'mod_list_pwlhtes': mod_list_pwlhtes
+    'mod_list_pwlhtes': mod_list_pwlhtes,
+    'egag': get_aggelies_endiaferomenos
 }
 
 def check(option):

@@ -84,3 +84,12 @@ def become_endiaferomenos(username):
     cur.execute(f'UPDATE melos SET is_endiaferomenos = 1 WHERE username == "{username}"')
     con.commit()
     con.close()
+
+def get_aggelies_endiaferomenos(username):
+    con, cur = connect()
+    melos_id = get_melos_id(username)
+    res = cur.execute(f'SELECT m_endiaferomenos_endiaferetai.aggelia_id FROM m_endiaferomenos_endiaferetai WHERE melos_id == "{melos_id}"')
+    print(res.fetchall())
+    con.commit()
+    con.close()
+    return username

@@ -76,6 +76,7 @@ def search_aggelies_katoikia(kat_type,min_price,max_price,heating_system,min_bat
     if max_price.isdigit():
         max_price = int(max_price)
         sql += f' AND aggelia.price <= {max_price}'
+    sql += ' ORDER BY aggelia.price'
     ret = cur.execute(sql, ret).fetchall()
     con.close()
     return ret
@@ -98,6 +99,7 @@ def search_aggelies_epaggelmatikos_xwros(min_price, max_price, min_construction_
     if max_price.isdigit():
         max_price = int(max_price)
         sql += f' AND aggelia.price <= {max_price}'
+    sql += ' ORDER BY aggelia.price'
     ret = cur.execute(sql, ret).fetchall()
     con.close()
     return ret

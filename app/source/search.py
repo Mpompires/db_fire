@@ -28,3 +28,7 @@ def search(*args):
         max_construction_year = input('-- Constructed before: ')
         tmp = search_aggelies_epaggelmatikos_xwros(min_price, max_price, min_construction_year, max_construction_year)
         print_table(tmp, ['ID αγγελίας', 'Πωλ./Εν.', 'Τιμή', ['Σημειώσεις', 10], 'Parking', 'Έτος κατασκευής', ['Internal', 10], ['External', 10]])
+    elif typ == '3':
+        print('Not implemented..')
+    else:
+        print('Invalid option..')
